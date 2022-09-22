@@ -7,9 +7,9 @@ class Style {
       backgroundColor: Colors.white,
       toolbarHeight: 80);
   static var textTheme = const TextTheme(
-    headlineLarge: TextStyle(
-        fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),
-  );
+      headlineLarge: TextStyle(
+          fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),
+      headlineSmall: TextStyle(fontSize: 15, fontWeight: FontWeight.bold));
 
   static var tabbarTheme = const TabBarTheme(
       indicator: UnderlineTabIndicator(
