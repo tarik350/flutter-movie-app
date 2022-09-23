@@ -23,6 +23,11 @@ class Style {
       labelStyle: TextStyle(fontSize: 30, fontWeight: FontWeight.bold));
 
   static var themeData = ThemeData(
+      textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+        overlayColor:
+            MaterialStateColor.resolveWith((states) => Colors.transparent),
+      )),
       textTheme: Style.textTheme,
       appBarTheme: Style.appBarTheme,
       tabBarTheme: Style.tabbarTheme,
