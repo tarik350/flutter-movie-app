@@ -4,10 +4,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/ticker_provider.dart';
 import 'package:flutter/material.dart';
 
-import 'package:movie_app/widget/secondary_scrollable_tabbar.dart';
+import 'package:movie_app/widget/secondary_tabbar/trending_secondary_tabbar.dart';
 
 class Trending extends StatefulWidget {
-  const Trending({Key? key}) : super(key: key);
+  const Trending({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Trending> createState() => _TrendingState();
@@ -15,7 +17,16 @@ class Trending extends StatefulWidget {
 
 class _TrendingState extends State<Trending>
     with SingleTickerProviderStateMixin {
+  final List<String> genere = [
+    'action',
+    'comedy',
+    'romance',
+    'adventure',
+    'sci-fi'
+  ];
   late AnimationController _controller;
+
+  String image = 'a list of random movies without any filter';
 
   @override
   void initState() {
@@ -33,10 +44,73 @@ class _TrendingState extends State<Trending>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
-        SecondaryScrollable(),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 20),
+          child: ListView(
+            children: <Widget>[
+              SizedBox(
+                height: 70.0,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: List.generate(5, (int index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      child: TextButton(
+                        onPressed: () {
+                          switch (genere[index]) {
+                            case 'action':
+                              setState(() {
+                                image = 'a list of action movies';
+                              });
+                              break;
+                            case 'comedy':
+                              setState(() {
+                                image = 'a list of comedy movies image';
+                              });
+                              break;
+                            case 'romance':
+                              setState(() {
+                                image = 'a list of romance movies image';
+                              });
+                              break;
+                            case 'adventure':
+                              setState(() {
+                                image = 'a list of adventure movies image';
+                              });
+                              break;
+                            case 'sci-fi':
+                              setState(() {
+                                image = 'a list of sci fi  moves image';
+                              });
+                              break;
+                          }
+                        },
+                        child: Container(
+                          width: 100.0,
+                          height: 100.0,
+                          decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                  side: BorderSide(
+                                      color: Colors.grey.shade400, width: 1))),
+                          child: Center(
+                              child: Text(
+                            genere[index],
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          )),
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ],
+          ),
+        ),
         Positioned(
             top: 100,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Center(
                   child: SizedBox(
@@ -55,7 +129,7 @@ class _TrendingState extends State<Trending>
                                     BorderSide(color: Colors.black, width: 3))),
                         child: Padding(
                           padding: EdgeInsets.all(12),
-                          child: Text('this is where the image comes in',
+                          child: Text(image,
                               style: Theme.of(context).textTheme.headlineLarge),
                         ),
                       ),
@@ -73,7 +147,7 @@ class _TrendingState extends State<Trending>
                               side: BorderSide(width: 2, color: Colors.black),
                               borderRadius: BorderRadius.circular(30))),
                       child: Text(
-                        'this is where the reting will be added',
+                        'movie rating',
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ),
