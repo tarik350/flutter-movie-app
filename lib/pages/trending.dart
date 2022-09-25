@@ -25,8 +25,13 @@ class _TrendingState extends State<Trending>
     'sci-fi'
   ];
   late AnimationController _controller;
-
+  String imageName = 'assets/images/black-panther.jpeg';
   String image = 'a list of random movies without any filter';
+  Color actionColor = Colors.transparent;
+  Color adventureColor = Colors.transparent;
+  Color comedyColor = Colors.transparent;
+  Color scifiColor = Colors.transparent;
+  Color romanceColor = Colors.transparent;
 
   @override
   void initState() {
@@ -40,120 +45,162 @@ class _TrendingState extends State<Trending>
     _controller.dispose();
   }
 
+  Column imageAndDescription() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.height * .4,
+          width: MediaQuery.of(context).size.width,
+          child: Container(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(imageName),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 20),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * .7,
+            height: MediaQuery.of(context).size.height * .1,
+            child: Container(
+              alignment: Alignment.center,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Rating',
+                      style: Theme.of(context).textTheme.headline4,
+                    )
+                  ]),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Padding containerMaker(int index, Color containerColor) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12),
+      child: Container(
+          width: 120.0,
+          height: 100.0,
+          decoration: ShapeDecoration(
+              color: containerColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  side: BorderSide(color: Colors.grey.shade400, width: 1))),
+          child: Center(
+            child: TextButton(
+                style: ButtonStyle(
+                    enableFeedback: false,
+                    overlayColor:
+                        MaterialStateProperty.all(Colors.transparent)),
+                child: Text(
+                  genere[index],
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                onPressed: () {
+                  handleState(index);
+                }),
+          )),
+    );
+  }
+
+  void handleState(int index) {
+    switch (genere[index]) {
+      case 'action':
+        setState(() {
+          image = 'a list of action movies';
+          actionColor = Color.fromRGBO(253, 109, 142, 1);
+          adventureColor = Colors.transparent;
+          comedyColor = Colors.transparent;
+          scifiColor = Colors.transparent;
+          romanceColor = Colors.transparent;
+          imageName = 'assets/images/star-is-born.jpeg';
+
+          // containerColor =
+          //     Color.fromRGBO(253, 109, 142, 1);
+        });
+        break;
+      case 'comedy':
+        setState(() {
+          image = 'a list of comedy movies image';
+          actionColor = Colors.transparent;
+          adventureColor = Colors.transparent;
+          comedyColor = Color.fromRGBO(253, 109, 142, 1);
+          scifiColor = Colors.transparent;
+          romanceColor = Colors.transparent;
+        });
+        break;
+      case 'romance':
+        setState(() {
+          actionColor = Colors.transparent;
+          adventureColor = Colors.transparent;
+          comedyColor = Colors.transparent;
+          scifiColor = Colors.transparent;
+          romanceColor = Color.fromRGBO(253, 109, 142, 1);
+          image = 'a list of romance movies image';
+        });
+        break;
+      case 'adventure':
+        setState(() {
+          actionColor = Colors.transparent;
+          adventureColor = Color.fromRGBO(253, 109, 142, 1);
+          comedyColor = Colors.transparent;
+          scifiColor = Colors.transparent;
+          romanceColor = Colors.transparent;
+          image = 'a list of adventure movies image';
+          imageName = 'assets/images/film-poster-graphic.jpeg';
+        });
+        break;
+      case 'sci-fi':
+        setState(() {
+          actionColor = Colors.transparent;
+          adventureColor = Colors.transparent;
+          comedyColor = Colors.transparent;
+          scifiColor = Color.fromRGBO(253, 109, 142, 1);
+          romanceColor = Colors.transparent;
+          image = 'a list of sci fi  moves image';
+        });
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
         Padding(
           padding: EdgeInsets.symmetric(vertical: 20),
-          child: ListView(
+          child: Column(
             children: <Widget>[
               SizedBox(
-                height: 70.0,
+                height: 50.0,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  children: List.generate(5, (int index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      child: TextButton(
-                        onPressed: () {
-                          switch (genere[index]) {
-                            case 'action':
-                              setState(() {
-                                image = 'a list of action movies';
-                              });
-                              break;
-                            case 'comedy':
-                              setState(() {
-                                image = 'a list of comedy movies image';
-                              });
-                              break;
-                            case 'romance':
-                              setState(() {
-                                image = 'a list of romance movies image';
-                              });
-                              break;
-                            case 'adventure':
-                              setState(() {
-                                image = 'a list of adventure movies image';
-                              });
-                              break;
-                            case 'sci-fi':
-                              setState(() {
-                                image = 'a list of sci fi  moves image';
-                              });
-                              break;
-                          }
-                        },
-                        child: Container(
-                          width: 100.0,
-                          height: 100.0,
-                          decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50),
-                                  side: BorderSide(
-                                      color: Colors.grey.shade400, width: 1))),
-                          child: Center(
-                              child: Text(
-                            genere[index],
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          )),
-                        ),
-                      ),
-                    );
-                  }),
+                  children: [
+                    containerMaker(0, actionColor),
+                    containerMaker(1, comedyColor),
+                    containerMaker(2, romanceColor),
+                    containerMaker(3, adventureColor),
+                    containerMaker(4, scifiColor),
+                  ],
                 ),
               ),
             ],
           ),
         ),
         Positioned(
-            top: 100,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Center(
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height * .4,
-                    width: MediaQuery.of(context).size.width,
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 60, vertical: 15),
-                      child: Container(
-                        alignment: Alignment.center,
-                        //color: Colors.red,
-                        decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                side:
-                                    BorderSide(color: Colors.black, width: 3))),
-                        child: Padding(
-                          padding: EdgeInsets.all(12),
-                          child: Text(image,
-                              style: Theme.of(context).textTheme.headlineLarge),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Center(
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * .7,
-                    height: MediaQuery.of(context).size.height * .1,
-                    child: Container(
-                      alignment: Alignment.center,
-                      decoration: ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(width: 2, color: Colors.black),
-                              borderRadius: BorderRadius.circular(30))),
-                      child: Text(
-                        'movie rating',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ),
-                  ),
-                )
-              ],
+            top: 150,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: List<Widget>.generate(100, (index) {
+                return imageAndDescription();
+              }),
             ))
       ]),
     );

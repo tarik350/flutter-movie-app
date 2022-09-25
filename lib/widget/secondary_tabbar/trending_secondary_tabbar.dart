@@ -1,7 +1,6 @@
 import 'package:movie_app/pages/boxoffice.dart';
 import 'package:movie_app/pages/trending.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/utils/data.dart';
 
 class TrendingAndTheaterSecondaryScrollable extends StatelessWidget {
   @override
