@@ -12,6 +12,7 @@ class MovieApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: Style.themeData,
         home: Scaffold(
             appBar: AppBar(

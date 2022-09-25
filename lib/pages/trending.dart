@@ -3,6 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/ticker_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/utils/movie_information.dart';
 
 import 'package:movie_app/widget/secondary_tabbar/trending_secondary_tabbar.dart';
 
@@ -45,18 +46,16 @@ class _TrendingState extends State<Trending>
     _controller.dispose();
   }
 
-  Column imageAndDescription() {
+  Column imageAndDescription(Size size) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
           height: MediaQuery.of(context).size.height * .4,
           width: MediaQuery.of(context).size.width,
-          child: Container(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(imageName),
-            ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: Image.asset(imageName),
           ),
         ),
         Padding(
@@ -172,8 +171,9 @@ class _TrendingState extends State<Trending>
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(children: [
+      body: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
         Padding(
           padding: EdgeInsets.symmetric(vertical: 20),
           child: Column(
@@ -194,14 +194,26 @@ class _TrendingState extends State<Trending>
             ],
           ),
         ),
-        Positioned(
-            top: 150,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: List<Widget>.generate(100, (index) {
-                return imageAndDescription();
-              }),
-            ))
+        SizedBox(
+          height: 35,
+        ),
+        Expanded(
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              MovieInformation(
+                size: size,
+                image: 'assets/images/black-panther.jpeg',
+              ),
+              MovieInformation(
+                size: size,
+                image: 'assets/images/star-is-born.jpeg',
+              ),
+              MovieInformation(
+                  size: size, image: 'assets/images/film-poster-graphic.jpeg')
+            ],
+          ),
+        )
       ]),
     );
   }
