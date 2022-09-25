@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/pages/boxoffice.dart';
+import 'package:movie_app/pages/in_theather.dart';
+import 'package:movie_app/pages/premiers.dart';
+import 'package:movie_app/pages/series.dart';
+import 'package:movie_app/pages/trending.dart';
 
 class TopTabBarWidget extends StatefulWidget {
   const TopTabBarWidget({Key? key}) : super(key: key);
@@ -12,18 +17,15 @@ class _TopTabBarWidget extends State<TopTabBarWidget>
   late TabController _tabController;
 
   List<Tab> tabs = <Tab>[
+    const Tab(text: 'In Theater'),
+    const Tab(text: 'Box Office'),
     const Tab(text: 'Trending'),
-    const Tab(text: 'Loved'),
-    const Tab(text: 'New'),
     const Tab(
-      text: 'Action',
+      text: 'Premiers',
     ),
     const Tab(
-      text: 'Romance',
+      text: 'Series',
     ),
-    const Tab(
-      text: 'Adventure',
-    )
   ];
 
   @override
@@ -53,105 +55,29 @@ class _TopTabBarWidget extends State<TopTabBarWidget>
           controller: _tabController,
           children: tabs.map((Tab tab) {
             switch (tab.text) {
-              case 'Romance':
+              case 'In Theater':
                 {
-                  return Center(
-                    child: SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: Container(
-                        alignment: Alignment.center,
-                        color: Color.fromRGBO(253, 109, 142, 1),
-                        child: Text('Romance',
-                            style: Theme.of(context).textTheme.headlineLarge),
-                      ),
-                    ),
-                  );
+                  return InTheather();
                 }
-              case 'Action':
+              case 'Box Office':
                 {
-                  return Center(
-                    child: SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: Container(
-                        alignment: Alignment.center,
-                        color: Color.fromRGBO(253, 109, 142, 1),
-                        child: Text('Action',
-                            style: Theme.of(context).textTheme.headlineLarge),
-                      ),
-                    ),
-                  );
-                }
-              case 'New':
-                {
-                  return Center(
-                    child: SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: Container(
-                        alignment: Alignment.center,
-                        color: Color.fromRGBO(253, 109, 142, 1),
-                        child: Text('New',
-                            style: Theme.of(context).textTheme.headlineLarge),
-                      ),
-                    ),
-                  );
-                }
-              case 'Loved':
-                {
-                  return Center(
-                    child: SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: Container(
-                        alignment: Alignment.center,
-                        color: Color.fromRGBO(253, 109, 142, 1),
-                        child: Text('Loved',
-                            style: Theme.of(context).textTheme.headlineLarge),
-                      ),
-                    ),
-                  );
+                  return BoxOffice();
                 }
               case 'Trending':
                 {
-                  return Center(
-                    child: SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: Container(
-                        alignment: Alignment.center,
-                        color: Color.fromRGBO(253, 109, 142, 1),
-                        child: Text('Trending',
-                            style: Theme.of(context).textTheme.headlineLarge),
-                      ),
-                    ),
-                  );
+                  return Trending();
                 }
-              case 'Adventure':
+              case 'Premiers':
                 {
-                  return Center(
-                    child: SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: Container(
-                        alignment: Alignment.center,
-                        color: Color.fromRGBO(253, 109, 142, 1),
-                        child: Text('Adventure',
-                            style: Theme.of(context).textTheme.headlineLarge),
-                      ),
-                    ),
-                  );
+                  return Premiers();
+                }
+              case 'Series':
+                {
+                  return Series();
                 }
             }
-
-            return Center(
-              child: SizedBox(
-                height: 200,
-                width: 200,
-                child: Container(color: Color.fromRGBO(253, 109, 142, 1)),
-              ),
-            );
+            // i don't know why but if i deleted this next line there will be alots of error
+            return const SizedBox();
           }).toList(),
         ))
       ],
