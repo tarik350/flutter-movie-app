@@ -18,8 +18,8 @@ class _TopTabBarWidget extends State<TopTabBarWidget>
 
   List<Tab> tabs = <Tab>[
     const Tab(text: 'In Theater'),
-    const Tab(text: 'Box Office'),
     const Tab(text: 'Trending'),
+    const Tab(text: 'Box Office'),
     const Tab(
       text: 'Premiers',
     ),
