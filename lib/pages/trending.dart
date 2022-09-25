@@ -66,7 +66,17 @@ class _TrendingState extends State<Trending>
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * .7,
                     height: MediaQuery.of(context).size.height * .1,
-                    child: Container(color: Colors.red),
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                              side: BorderSide(width: 2, color: Colors.black),
+                              borderRadius: BorderRadius.circular(30))),
+                      child: Text(
+                        'this is where the reting will be added',
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    ),
                   ),
                 )
               ],
